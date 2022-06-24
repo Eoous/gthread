@@ -1,16 +1,19 @@
 #pragma once
 
-#include <any>
+#include "fwd.hpp"
 
-class mopthread {
-public:
-    int nref[1];     // atomic reference count
-    uint32_t tid;    // thread id
-    std::any handle; // win32 thread handle
-    std::any status; // exit code
-    std::any param;  // startup parameter
-};
+namespace gthread {
+    class thread_control {
+    public:
+        int nref[1];     // atomic reference count
+        uint32_t tid;    // thread id
+        std::any handle; // win32 thread handle
 
-extern const std::any crt_module;
-extern const uint32_t tls_index;
-extern const mopthread main_thread;
+        thread_procedure proc; // exit code
+        intptr_t param[4];  // startup parameter
+
+        auto on_detach() noexcept {
+
+        }
+    };
+}
