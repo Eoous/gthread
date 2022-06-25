@@ -3,4 +3,7 @@ project(gthread)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(gthread main.cc)
+#set(CMAKE_SHARED_LINKER_FLAGS "-Wl,-egthread_startup,--exclude-symbols,gthread_startup")
+add_library(gthread SHARED main.cc)
+
+add_executable(wrapper wrapper.cc)
