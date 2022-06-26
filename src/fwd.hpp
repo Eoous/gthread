@@ -1,7 +1,3 @@
-//
-// Created by yoshino on 2022/10/20.
-//
-
 #ifndef GTHREAD_FWD_HPP
 #define GTHREAD_FWD_HPP
 
