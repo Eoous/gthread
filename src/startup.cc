@@ -32,6 +32,7 @@ int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
         if (!main_thread.handle.has_value()) {
             std::puts("main_thread.handle doesn't contain value");
         }
+        TlsSetValue(tls_index, &main_thread);
     }
 
     if (reason == DLL_PROCESS_DETACH) {
