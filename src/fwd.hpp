@@ -8,6 +8,8 @@
 #ifndef STARTUP
 #  define DYNCONST const
 #  define INLINE extern __inline__ __attribute__((gnu_inline__))
+#else
+#  define DYNCONST
 #endif
 
 namespace gthread {
@@ -19,7 +21,7 @@ namespace gthread {
     using cond = class cond;
     using once = class once;
 
-    // Define static data.
+    // Define static data, which are defined in 'startup.cc'
     extern DYNCONST std::any crt_module;
     extern DYNCONST uint32_t tls_index;
     extern DYNCONST thread_control main_thread;
