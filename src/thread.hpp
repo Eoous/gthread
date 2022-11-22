@@ -12,11 +12,11 @@ namespace gthread {
 
         thread_procedure proc; // exit code
         intptr_t param[4];  // startup parameter
-
-        auto on_detach() noexcept {
-
-        }
     };
+
+    auto gthread_exit_callback() noexcept {
+
+    }
 }
 
 #endif //GTHREAD_THREAD_HPP

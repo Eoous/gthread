@@ -27,20 +27,19 @@ int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
             std::puts("tls out of indexes");
         }
 
-        main_thread.tid = GetCurrentThreadId();
         main_thread.handle = OpenThread(THREAD_ALL_ACCESS, false, main_thread.tid);
         if (!main_thread.handle.has_value()) {
             std::puts("main_thread.handle doesn't contain value");
         }
+
+        main_thread.tid = GetCurrentThreadId();
+        __atomic_store_n(main_thread.nref, -1, __ATOMIC_RELAXED);
         TlsSetValue(tls_index, &main_thread);
     }
 
     if (reason == DLL_PROCESS_DETACH) {
         std::puts("process detach dll");
-        auto control = reinterpret_cast<gthread::thread_control*>(TlsGetValue(tls_index));
-        if (control) {
-            control->on_detach();
-        }
+        gthread::gthread_exit_callback();
     }
 
     return 0;
