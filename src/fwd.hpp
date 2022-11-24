@@ -5,6 +5,10 @@
 #include <functional>
 #include <memory>
 
+#if (0 + __BYTE_ORDER__) != __ORDER_LITTLE_ENDIAN__
+#error Windows platforms are assumed to be little-endian.
+#endif
+
 #ifndef STARTUP
 #  define DYNCONST const
 #  define INLINE extern __inline__ __attribute__((gnu_inline__))
