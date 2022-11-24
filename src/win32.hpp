@@ -31,8 +31,14 @@ namespace gthread {
     SIZE_T __stdcall RtlCompareMemory(const void* __s1, const void* __s2,
                                       SIZE_T __size) __attribute__((__dllimport__, __pure__, __nothrow__));
 
-    bool __stdcall RtlEqualMemory(const void* __s1, const void* __s2,
-                                  SIZE_T __size) __attribute__((__dllimport__, __pure__, __nothrow__));
+    NTSTATUS __stdcall
+    NtWaitForKeyedEvent(HANDLE __event, void* __key, BOOLEAN __alertable, const LARGE_INTEGER* __timeout) __attribute__((__dllimport__, __nothrow__));
+
+    NTSTATUS __stdcall
+    NtReleaseKeyedEvent(HANDLE __event, void* __key, BOOLEAN __alertable, const LARGE_INTEGER* __timeout) __attribute__((__dllimport__, __nothrow__));
+
+    BOOLEAN __stdcall
+    RtlDllShutdownInProgress(void) __attribute__((__dllimport__, __nothrow__));
 }
 
 #endif //GTHREAD_WIN32_HPP

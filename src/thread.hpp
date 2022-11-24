@@ -4,6 +4,8 @@
 #include "fwd.hpp"
 
 namespace gthread {
+    using thread_procedure = std::function<void(std::shared_ptr<thread_control>)>;
+
     class thread_control {
     public:
         int nref[1];     // atomic reference count

@@ -19,20 +19,25 @@ DYNCONST auto main_thread = gthread::thread_control{
 int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
     std::puts("hello, gthread_startup");
 
+    if (instance != &image_base_from_gnu_ld) {
+        PANIC();
+    }
     if (reason == DLL_PROCESS_ATTACH) {
         std::puts("process attach dll");
 
         tls_index = TlsAlloc();
         if (tls_index == TLS_OUT_OF_INDEXES) {
             std::puts("tls out of indexes");
-        }
-
-        main_thread.handle = OpenThread(THREAD_ALL_ACCESS, false, main_thread.tid);
-        if (!main_thread.handle.has_value()) {
-            std::puts("main_thread.handle doesn't contain value");
+            PANIC();
         }
 
         main_thread.tid = GetCurrentThreadId();
+        main_thread.handle = OpenThread(THREAD_ALL_ACCESS, false, main_thread.tid);
+        if (!main_thread.handle.has_value()) {
+            std::puts("main_thread.handle doesn't contain value");
+            PANIC();
+        }
+
         __atomic_store_n(main_thread.nref, -1, __ATOMIC_RELAXED);
         TlsSetValue(tls_index, &main_thread);
     }

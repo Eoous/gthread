@@ -16,10 +16,13 @@
 #  define DYNCONST
 #endif
 
+constexpr auto PANIC = []() {
+    __builtin_trap();
+};
+
 namespace gthread {
     // Make some forward-declarations.
     using thread_control = class thread_control;
-    using thread_procedure = std::function<void(std::shared_ptr<thread_control>)>;
 
     using mutex = class mutex;
     using cond = class cond;
