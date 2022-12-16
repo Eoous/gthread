@@ -15,6 +15,7 @@ DYNCONST uint32_t tls_index = 0;
 DYNCONST auto main_thread = gthread::thread_control{
         .nref = {0}
 };
+double _perf_frequency_reciprocal = 0;
 
 int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
     std::puts("hello, gthread_startup");
@@ -30,6 +31,13 @@ int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
             std::puts("tls out of indexes");
             PANIC();
         }
+
+        LARGE_INTEGER li;
+        if (QueryPerformanceFrequency(&li) == false) {
+            __G_PANIC();
+        }
+
+        _perf_frequency_reciprocal = 1000 / (double) li.QuadPart;
 
         main_thread.tid = GetCurrentThreadId();
         main_thread.handle = OpenThread(THREAD_ALL_ACCESS, false, main_thread.tid);
