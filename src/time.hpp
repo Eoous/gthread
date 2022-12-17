@@ -16,7 +16,7 @@ namespace gthread {
     }
 
     int64_t tick_count() __G_NOEXCEPT {
-        return GetTickCount64();
+        return GetTickCount();
     }
 
     int64_t perf_count() __G_NOEXCEPT {
