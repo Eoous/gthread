@@ -1,6 +1,4 @@
-#ifndef GTHREAD_TIME_HPP
-#define GTHREAD_TIME_HPP
-
+#pragma once
 #include "fwd.hpp"
 #include "win32.hpp"
 
@@ -27,4 +25,3 @@ namespace gthread {
         return (double) li.QuadPart * perf_frequency_reciprocal;
     }
 }
-#endif

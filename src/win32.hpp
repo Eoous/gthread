@@ -1,11 +1,4 @@
-//
-// Created by yoshino on 2022/10/20.
-//
-
-#ifndef GTHREAD_WIN32_HPP
-#define GTHREAD_WIN32_HPP
-
-
+#pragma once
 #include <windows.h>
 #include <ntstatus.h>
 #include <winternl.h>
@@ -40,5 +33,3 @@ namespace gthread {
     BOOLEAN __stdcall
     RtlDllShutdownInProgress(void) __attribute__((__dllimport__, __nothrow__));
 }
-
-#endif //GTHREAD_WIN32_HPP

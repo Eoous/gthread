@@ -1,6 +1,4 @@
-#ifndef GTHREAD_THREAD_HPP
-#define GTHREAD_THREAD_HPP
-
+#pragma once
 #include "fwd.hpp"
 
 namespace gthread {
@@ -20,5 +18,3 @@ namespace gthread {
 
     }
 }
-
-#endif //GTHREAD_THREAD_HPP

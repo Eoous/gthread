@@ -1,6 +1,4 @@
-#ifndef GTHREAD_MEMORY_HPP
-#define GTHREAD_MEMORY_HPP
-
+#pragma once
 #include "win32.hpp"
 
 auto __malloc0(size_t size) {
@@ -30,5 +28,3 @@ auto __mzero(void* dst, size_t size) {
 auto __mequal(const void* src, const void* cmp, size_t size) {
     return RtlCompareMemory(src, cmp, size) == size;
 }
-
-#endif //GTHREAD_MEMORY_HPP

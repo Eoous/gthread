@@ -1,6 +1,4 @@
-#ifndef GTHREAD_FWD_HPP
-#define GTHREAD_FWD_HPP
-
+#pragma once
 #include <any>
 #include <functional>
 #include <memory>
@@ -39,4 +37,3 @@ namespace gthread {
     extern DYNCONST double perf_frequency_reciprocal;
     extern DYNCONST thread_control main_thread;
 }
-#endif //GTHREAD_FWD_HPP
