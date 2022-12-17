@@ -43,7 +43,10 @@ int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
 
         main_thread.tid = GetCurrentThreadId();
         main_thread.handle = OpenThread(THREAD_ALL_ACCESS, false, main_thread.tid);
+
         std::puts((std::string("Tick out: ") + std::to_string(gthread::tick_count())).data());
+        std::puts((std::string("UTC now: ") + std::to_string(gthread::utc_now())).data());
+
         if (!main_thread.handle.has_value()) {
             std::puts("main_thread.handle doesn't contain value");
             PANIC();

@@ -12,7 +12,7 @@ namespace gthread {
         ui.HighPart = ft.dwHighDateTime;
 
         // convert it into unix epoch in milliseconds.
-        return static_cast<int64_t>(((double) (int64_t) ui.QuadPart - 116444736e9 / 1e4));
+        return static_cast<int64_t>(((double) (int64_t) ui.QuadPart - 116444736e9) / 1e4);
     }
 
     int64_t tick_count() __G_NOEXCEPT {
