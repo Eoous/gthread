@@ -36,7 +36,7 @@ namespace gthread {
     // Define static data, which are defined in 'startup.cc'
     extern DYNCONST std::any crt_module;
     extern DYNCONST uint32_t tls_index;
-    extern DYNCONST double _perf_frequency_reciprocal;
+    extern DYNCONST double perf_frequency_reciprocal;
     extern DYNCONST thread_control main_thread;
 }
 #endif //GTHREAD_FWD_HPP

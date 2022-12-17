@@ -5,7 +5,7 @@
 #include "win32.hpp"
 
 namespace gthread {
-    auto _utc_now() __G_NOEXCEPT -> int64_t {
+    auto utc_now() __G_NOEXCEPT -> int64_t {
         FILETIME ft;
         GetSystemTimeAsFileTime(&ft);
 
@@ -17,14 +17,14 @@ namespace gthread {
         return static_cast<int64_t>(((double) (int64_t) ui.QuadPart - 116444736e9 / 1e4));
     }
 
-    int64_t _tick_count() __G_NOEXCEPT {
+    int64_t tick_count() __G_NOEXCEPT {
         return GetTickCount64();
     }
 
-    int64_t _perf_count() __G_NOEXCEPT {
+    int64_t perf_count() __G_NOEXCEPT {
         LARGE_INTEGER li;
         QueryPerformanceCounter(&li);
-        return (double) li.QuadPart * _perf_frequency_reciprocal;
+        return (double) li.QuadPart * perf_frequency_reciprocal;
     }
 }
 #endif
