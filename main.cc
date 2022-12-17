@@ -1,6 +1,14 @@
-#include "./src/win32.hpp"
+#include "src/win32.hpp"
+
+extern "C" {
+int puts(const char *);
+}
 
 auto main() -> int {
-    LoadLibraryA("./libgthread.dll");
+    auto dll_name = "libgthread.dll";
+    if(LoadLibraryA(dll_name) == nullptr){
+        puts("Err: Load Dynamic Library");
+    }
+
     return 0;
 }

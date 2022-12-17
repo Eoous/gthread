@@ -58,5 +58,5 @@ int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
         gthread::gthread_exit_callback();
     }
 
-    return 0;
+    return 1;
 }
