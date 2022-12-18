@@ -1,4 +1,4 @@
-#include "src/win32.hpp"
+#include <windows.h>
 
 extern "C" {
 int puts(const char *);

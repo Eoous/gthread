@@ -1,8 +1,8 @@
 # gthread
 
 ## build
-
+Recommend mingw-w64 for compiling.
 ```shell
 mkdir build && cd build
-cmake --build --target all ..
+cmake .. && cmake --build .
 ```
