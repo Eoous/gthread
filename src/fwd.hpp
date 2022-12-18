@@ -7,7 +7,7 @@
 #error Windows platforms are assumed to be little-endian.
 #endif
 
-#define __G_NOEXCEPT noexcept
+#define G_NOEXCEPT noexcept
 
 #ifndef STARTUP
 #  define DYNCONST const
