@@ -14,7 +14,7 @@ extern "C" {
 DYNCONST std::any crt_module = &image_base_from_gnu_ld;
 DYNCONST uint32_t tls_index = 0;
 DYNCONST gthread::thread_control main_thread = {
-    .nref = {0}
+    .nref_ = {0}
 };
 double perf_frequency_reciprocal = 0;
 }
@@ -41,18 +41,18 @@ int gthread_startup(HANDLE instance, DWORD reason, LPVOID reserved) {
 
         perf_frequency_reciprocal = 1000 / (double) li.QuadPart;
 
-        main_thread.tid = GetCurrentThreadId();
-        main_thread.handle = OpenThread(THREAD_ALL_ACCESS, false, main_thread.tid);
+        main_thread.tid_ = GetCurrentThreadId();
+        main_thread.handle_ = OpenThread(THREAD_ALL_ACCESS, false, main_thread.tid_);
 
         std::puts((std::string("Tick out: ") + std::to_string(gthread::tick_count())).data());
         std::puts((std::string("UTC now: ") + std::to_string(gthread::utc_now())).data());
 
-        if (!main_thread.handle.has_value()) {
-            std::puts("main_thread.handle doesn't contain value");
+        if (!main_thread.handle_.has_value()) {
+            std::puts("main_thread.handle_ doesn't contain value");
             PANIC();
         }
 
-        __atomic_store_n(main_thread.nref, -1, __ATOMIC_RELAXED);
+        __atomic_store_n(main_thread.nref_, -1, __ATOMIC_RELAXED);
         TlsSetValue(tls_index, &main_thread);
     }
 

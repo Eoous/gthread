@@ -2,14 +2,23 @@
 #include "fwd.hpp"
 
 namespace gthread {
+    using unlock_callback = std::function<intptr_t(intptr_t)>;
+    using relock_callback = std::function<void(intptr_t, intptr_t)>;
+
+    auto do_wait_cleanup(
+            unlock_callback unlock_opt, intptr_t unlocked,
+            relock_callback relock_opt, intptr_t lock_arg) {
+        if(unlock_opt && relock_opt) {
+            relock_opt(lock_arg, unlocked);
+        }
+    }
+
     class cond {
-        using unlock_callback = std::function<intptr_t(intptr_t)>;
-        using relock_callback = std::function<void(intptr_t, intptr_t)>;
     public:
-        uintptr_t _reserved: 8;
+        uintptr_t reserved_: 8;
 #define COND_NS_B   (__INTPTR_WIDTH__ - 8)
 #define COND_NS_M    (UINTPTR_MAX    >> 8)
-        uintptr_t _nsleep: COND_NS_B;
+        uintptr_t nsleep_: COND_NS_B;
 
     public:
         auto init() G_NOEXCEPT {

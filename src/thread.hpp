@@ -6,12 +6,12 @@ namespace gthread {
 
     class thread_control {
     public:
-        int nref[1];     // atomic reference count
-        uint32_t tid;    // thread id
-        std::any handle; // win32 thread handle
+        int nref_[1];     // atomic reference count
+        uint32_t tid_;    // thread id
+        std::any handle_; // win32 thread handle_
 
-        thread_procedure proc; // exit code
-        intptr_t param[4];  // startup parameter
+        thread_procedure proc_; // exit code
+        intptr_t param_[4];  // startup parameter
     };
 
     auto gthread_exit_callback() noexcept {

@@ -4,6 +4,12 @@ project(gthread)
 set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_SHARED_LINKER_FLAGS "-Wl,-e,gthread_startup,--exclude-symbols,gthread_startup")
-add_library(gthread SHARED src/startup.cc)
+
+file(
+    GLOB SOURCES
+    src/*.hpp
+    src/*.cc
+)
+add_library(gthread SHARED ${SOURCES})
 
 add_executable(main main.cc)
