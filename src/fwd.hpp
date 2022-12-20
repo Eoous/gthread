@@ -31,6 +31,10 @@ namespace gthread {
     using cond = class cond;
     using once = class once;
 
+    constexpr inline auto minz(size_t x, size_t y) G_NOEXCEPT -> size_t {
+        return y < x ? y : x;
+    }
+
     extern "C" {
     // Define static data, which are defined in 'startup.cc'
     extern DYNCONST std::any crt_module;
